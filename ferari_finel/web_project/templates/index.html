@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>אתר אישי</title>
+  <title>Personal Website</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -40,6 +40,26 @@
     }
     li {
       margin-bottom: 1rem;
+      position: relative;
+      cursor: pointer;
+    }
+    .project-info {
+      display: none;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      position: absolute;
+      top: -10px;
+      left: 110%;
+      width: 300px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    li:hover .project-info {
+      display: block;
+      transform: translateX(-10px);
+      opacity: 1;
     }
     a {
       color: #007bff;
@@ -55,36 +75,42 @@
 </head>
 <body>
   <header>
-    <h1>שם פרטי שלך</h1>
-    <p>ברוכים הבאים לאתר האישי שלי</p>
+    <h1>Your First Name</h1>
+    <p>Welcome to my personal website</p>
   </header>
   <div class="container">
     <section id="about">
-      <h2>אודותי</h2>
-      <p>שלום! אני [שם פרטי] וזהו האתר האישי שלי. [תיאור קצר על עצמך ועל מה שאתה עושה].</p>
+      <h2>About Me</h2>
+      <p>Hello! I'm [Your First Name] and this is my personal website. [Short description about yourself and what you do.]</p>
     </section>
     <section id="projects">
-      <h2>פרוייקטים</h2>
+      <h2>Projects</h2>
       <ul>
         <li>
-          <h3>פרוייקט 1</h3>
-          <p>כאן תיאור קצר של הפרוייקט. תיאור מפורט יותר יכול להיות כאן.</p>
+          <h3>CI/CD project</h3>
+          <div class="project-info">
+            <p>A short description of Project 1. More detailed description can go here.</p>
+            <a href="https://github.com/yotamdavid/ferari_finel.git">Learn more</a>
+          </div>
         </li>
         <li>
-          <h3>פרוייקט 2</h3>
-          <p>כאן תיאור קצר של הפרוייקט. תיאור מפורט יותר יכול להיות כאן.</p>
+          <h3>Project 2</h3>
+          <div class="project-info">
+            <p>A short description of Project 2. More detailed description can go here.</p>
+            <a href="project2_link">Learn more</a>
+          </div>
         </li>
       </ul>
     </section>
     <section id="contact">
-      <h2>צור קשר</h2>
-      <p>אני זמין לשאלות, הצעות ושיתוף פעולה:</p>
-      <p>Email: <a href="mailto:your@email.com">yotam.david1@gmail.com</a></p>
-      <p>טלפון: <a href="tel:+123456789">054-9512557</a></p>
+      <h2>Contact Me</h2>
+      <p>I'm available for questions, suggestions, and collaboration:</p>
+      <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
+      <p>Phone: <a href="tel:+123456789">123-456-789</a></p>
     </section>
   </div>
   <footer>
-    <p>כל הזכויות שמורות &copy; 2023 | yotam david </p>
+    <p>All rights reserved &copy; 2023 | [Your First Name]</p>
   </footer>
 </body>
 </html>
