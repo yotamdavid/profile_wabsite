@@ -4,39 +4,26 @@ function toggleNav() {
     navLinks.classList.toggle('active');
 }
 
-// Flip project card on hover
-function rotateCard(card) {
-    card.classList.toggle('flipped');
-
-    // Toggle the visibility of project descriptions
+// Toggle project description on click
+function toggleDescription(card) {
     var projectDesc = card.querySelector('.project-description');
-    var projectDescFlipped = card.querySelector('.project-description-flipped');
+    var projectDescHidden = card.querySelector('.project-description-hidden');
+    var learnMoreLink = card.querySelector('.learn-more');
 
-    if (card.classList.contains('flipped')) {
-        projectDesc.style.display = 'none';
-        projectDescFlipped.style.display = 'block';
-    } else {
-        projectDesc.style.display = 'block';
-        projectDescFlipped.style.display = 'none';
-    }
+    projectDesc.classList.toggle('hidden');
+    projectDescHidden.classList.toggle('visible');
+    learnMoreLink.classList.toggle('hidden');
 }
 
-// Initialize by hiding flipped descriptions
+// Initialize by hiding additional descriptions
 var projectCards = document.querySelectorAll('.project-card');
 projectCards.forEach(function(card) {
     var projectDesc = card.querySelector('.project-description');
-    var projectDescFlipped = card.querySelector('.project-description-flipped');
-    projectDesc.style.display = 'block';
-    projectDescFlipped.style.display = 'none';
+    var projectDescHidden = card.querySelector('.project-description-hidden');
+    var learnMoreLink = card.querySelector('.learn-more');
+
+    projectDescHidden.classList.add('visible');
+    projectDesc.classList.remove('hidden');
+    learnMoreLink.classList.remove('hidden');
 });
 
-// Toggle the visibility of project descriptions initially
-function toggleInitialDesc(card) {
-    var projectDesc = card.querySelector('.project-description');
-    var projectDescFlipped = card.querySelector('.project-description-flipped');
-    projectDesc.style.display = 'block';
-    projectDescFlipped.style.display = 'none';
-}
-
-var initialCards = document.querySelectorAll('.project-card');
-initialCards.forEach(toggleInitialDesc);
