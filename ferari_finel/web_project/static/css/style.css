@@ -77,25 +77,15 @@ nav {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Flipping Animation */
-@keyframes rotate {
-    from {
-        transform: rotateY(0deg);
-    }
-    to {
-        transform: rotateY(180deg);
-    }
-}
-
-.project-card.flipped {
-    animation: rotate 0.5s forwards;
-}
-
-/* Project Description Styling */
-.project-description {
-    display: block;
-}
-
-.project-description-flipped {
+/* Additional Description Styling */
+.project-description-hidden {
     display: none;
+}
+
+.learn-more.hidden {
+    display: none;
+}
+
+.learn-more.visible {
+    display: inline;
 }
