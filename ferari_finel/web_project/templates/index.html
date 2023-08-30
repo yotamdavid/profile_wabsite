@@ -7,28 +7,23 @@
     <title>Your Name - Portfolio</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    {{ include('nav.html') }}
+
     <header>
         <h1>Your Name</h1>
         <p>Welcome to my portfolio website!</p>
     </header>
 
     <section id="about">
-        <!-- Your about me content goes here -->
+        <!-- About content -->
     </section>
 
     <section id="projects">
-        <!-- Your projects content goes here -->
+        <!-- Projects content -->
     </section>
 
     <section id="contact">
-        <!-- Your contact content goes here -->
+        <!-- Contact content -->
     </section>
 
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
