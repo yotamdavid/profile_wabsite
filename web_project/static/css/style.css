@@ -199,7 +199,7 @@ footer {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 20px; /* רווח מלמעלה */
+    margin-top: 40px; /* רווח מלמעלה */
 }
 
 .button-link-cv:hover {
