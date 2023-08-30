@@ -211,10 +211,6 @@ footer {
     @include section-styling;
 }
 
-.section {
-    /* סטיילים לכותרות כאן */
-}
-
 /* סטיילים של הקטגוריות */
 .categories {
     display: flex;
@@ -266,3 +262,4 @@ footer {
         transform: translateY(0);
     }
 }
+
