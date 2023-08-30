@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>התחברות</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>התחברות</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="/login">
+        <label for="username">שם משתמש:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">סיסמה:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="התחבר">
+    </form>
+</body>
+</html>

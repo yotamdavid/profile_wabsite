@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>התנתקות</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>התנתקות</h1>
+    {% if 'username' in session %}
+        <p>ברוך הבא, {{ session['username'] }}!</p>
+        <p>האם אתה בטוח שברצונך להתנתק?</p>
+        <a href="/logout">התנתק</a>
+    {% else %}
+        <p>אתה לא מחובר.</p>
+        <a href="/">חזור לעמוד הראשי</a>
+    {% endif %}
+</body>
+</html>
+
