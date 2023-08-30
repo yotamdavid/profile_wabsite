@@ -16,3 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     cat.classList.remove('active');
                 }
             });
+            
+            category.classList.toggle('active');
+        });
+    });
+});
