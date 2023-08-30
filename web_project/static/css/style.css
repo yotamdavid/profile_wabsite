@@ -253,7 +253,9 @@ footer {
     animation: slide-in 0.3s ease-in-out;
 }
 
-@keyframes slide-in {
+
+/* אנימציה נוספת עבור תוכן הקטגוריה */
+@keyframes slide-in-content {
     from {
         opacity: 0;
         transform: translateY(-20px);
@@ -263,4 +265,11 @@ footer {
         transform: translateY(0);
     }
 }
+
+
+
+
+
+
+
 
