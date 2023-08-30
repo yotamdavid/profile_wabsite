@@ -7,7 +7,7 @@ body {
 
 /* Header Styling */
 header {
-    background-color: #f7f7f7;
+    background-color: #333333;
     color: white;
     text-align: center;
     padding: 1rem 0;
@@ -68,7 +68,7 @@ h2 {
 .section {
     padding: 80px 10%;
     text-align: center;
-    background-color: #333333;
+    background-color: #f7f7f7;
 }
 
 /* Project Card Styling */
