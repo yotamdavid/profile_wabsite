@@ -211,7 +211,6 @@ footer {
     @include section-styling;
 }
 
-/* סטיילים של הקטגוריות */
 .categories {
     display: flex;
     justify-content: space-between;
@@ -223,16 +222,11 @@ footer {
     border-radius: 10px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: calc(33.33% - 40px);
+    flex: 1;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     cursor: pointer;
     margin: 0 10px;
-}
-
-.category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .category-title {
@@ -252,4 +246,13 @@ footer {
     animation: slide-in 0.3s ease-in-out;
 }
 
-
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
