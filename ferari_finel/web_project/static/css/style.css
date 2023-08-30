@@ -90,3 +90,12 @@ nav {
 .project-card.flipped {
     animation: rotate 0.5s forwards;
 }
+
+/* Project Description Styling */
+.project-description {
+    display: block;
+}
+
+.project-description-flipped {
+    display: none;
+}
