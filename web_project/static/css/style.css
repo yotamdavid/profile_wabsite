@@ -1,12 +1,9 @@
 /* General Styling */
-.section {
-    background-color: #f7f7f7; /* צבע הרקע האפור */
-}
 
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #333333;
+    background-color: red;
 }
 
 /* Header Styling */
