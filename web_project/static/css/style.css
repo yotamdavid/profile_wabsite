@@ -242,3 +242,7 @@ footer {
 .category.active .category-content {
     display: block;
 }
+
+.category-content h4 {
+    margin-top: 20px;
+}
