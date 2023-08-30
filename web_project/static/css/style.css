@@ -87,6 +87,10 @@ h2 {
     margin-top: 80px; /* רווח בין סקשן לסקשן מעליו */
 }
 
+.content-wrapper {
+    margin: 40px; /* רווח חיצוני לאתר */
+}
+
 /* Project Card Styling */
 .project-card {
     background-color: white;
