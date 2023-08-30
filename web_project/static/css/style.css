@@ -211,6 +211,8 @@ footer {
     @include section-styling;
 }
 
+
+/* סטיילים של הקטגוריות */
 .categories {
     display: flex;
     justify-content: space-between;
@@ -261,3 +263,4 @@ footer {
         transform: translateY(0);
     }
 }
+
