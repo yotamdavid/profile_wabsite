@@ -4,26 +4,27 @@ function toggleNav() {
     navLinks.classList.toggle('active');
 }
 
-// Toggle project description on click
-function toggleDescription(card) {
-    var projectDesc = card.querySelector('.project-description');
-    var projectDescHidden = card.querySelector('.project-description-hidden');
-    var learnMoreLink = card.querySelector('.learn-more');
-
-    projectDesc.classList.toggle('hidden');
-    projectDescHidden.classList.toggle('visible');
-    learnMoreLink.classList.toggle('hidden');
+// Flip project card on hover
+function rotateCard(card) {
+    card.classList.toggle('flipped');
 }
 
-// Initialize by hiding additional descriptions
+// Initialize by hiding flipped descriptions
 var projectCards = document.querySelectorAll('.project-card');
 projectCards.forEach(function(card) {
     var projectDesc = card.querySelector('.project-description');
-    var projectDescHidden = card.querySelector('.project-description-hidden');
-    var learnMoreLink = card.querySelector('.learn-more');
-
-    projectDescHidden.classList.add('visible');
-    projectDesc.classList.remove('hidden');
-    learnMoreLink.classList.remove('hidden');
+    var projectDescFlipped = card.querySelector('.project-description-flipped');
+    projectDesc.style.display = 'block';
+    projectDescFlipped.style.display = 'none';
 });
 
+// Toggle the visibility of project descriptions initially
+function toggleInitialDesc(card) {
+    var projectDesc = card.querySelector('.project-description');
+    var projectDescFlipped = card.querySelector('.project-description-flipped');
+    projectDesc.style.display = 'block';
+    projectDescFlipped.style.display = 'none';
+}
+
+var initialCards = document.querySelectorAll('.project-card');
+initialCards.forEach(toggleInitialDesc);
