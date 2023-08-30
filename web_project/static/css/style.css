@@ -140,22 +140,18 @@ h2 {
 }
 
 .about-image {
-    width: 50%; /* חצי הרוחב לתמונה */
+    width: 100%; /* חצי הרוחב לתמונה */
     display: flex;
-    justify-content: center; /* יישור למרכז */
+    justify-content: flex-end; /* יישור לצד ימין */
     align-items: flex-start; /* יישור למעלה */
     max-height: 600px; /* הגבלת גובה מקסימלי */
-    overflow: hidden; /* הסתרת חלק מהתמונה */
-    position: relative; /* כדי להסתיר את החלק שנמסתר */
+    padding-right: 140px; /* מרווח מימין */
 }
 
 .about-image img {
     width: auto; /* השאר את הרוחב כפי שהוא */
     height: 100%; /* מילוי את הגובה בכדי לשמור על יחס הגובה לרוחב */
     animation: slide-in 1s ease-out;
-    position: absolute; /* אחזור למקור כדי להסתיר את החלק החשוף */
-    top: 0; /* יישור למעלה */
-    left: 0; /* יישור לשמאל */
 }
 
 /* Keyframes Animation */
