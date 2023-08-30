@@ -8,16 +8,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const categories = document.querySelectorAll('.category');
 
     categories.forEach(category => {
-        const categoryTitle = category.querySelector('.category-title');
+        const categoryCheckbox = category.querySelector('.category-toggle');
 
-        categoryTitle.addEventListener('click', () => {
+        categoryCheckbox.addEventListener('change', () => {
             categories.forEach(cat => {
                 if (cat !== category) {
                     cat.classList.remove('category-active');
                 }
             });
-
-            category.classList.toggle('category-active');
+            
+            category.classList.toggle('category-active', categoryCheckbox.checked);
         });
     });
 });
