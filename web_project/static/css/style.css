@@ -140,11 +140,12 @@ h2 {
 }
 
 .about-image {
-    width: 100%; /* חצי הרוחב לתמונה */
+    width: 50%; /* חצי הרוחב לתמונה */
     display: flex;
     justify-content: flex-end; /* יישור לצד ימין */
     align-items: flex-start; /* יישור למעלה */
     max-height: 600px; /* הגבלת גובה מקסימלי */
+    overflow: hidden; /* הסתרת חלק מהתמונה */
     padding-right: 140px; /* מרווח מימין */
 }
 
