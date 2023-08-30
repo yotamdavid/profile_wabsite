@@ -20,3 +20,12 @@ function rotateCard(card) {
         projectDescFlipped.style.display = 'none';
     }
 }
+
+// Initialize by hiding flipped descriptions
+var projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(function(card) {
+    var projectDesc = card.querySelector('.project-description');
+    var projectDescFlipped = card.querySelector('.project-description-flipped');
+    projectDesc.style.display = 'block';
+    projectDescFlipped.style.display = 'none';
+});
