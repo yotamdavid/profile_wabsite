@@ -1,131 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f8f8;
-    }
-    header {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 2rem 0;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    h1 {
-      color: #333;
-    }
-    h2 {
-      color: #333;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.5rem;
-    }
-    p {
-      color: #666;
-      line-height: 1.6;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 1rem;
-      position: relative;
-      cursor: pointer;
-    }
-    .project-info {
-      display: none;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      padding: 1rem;
-      position: absolute;
-      top: -10px;
-      left: 110%;
-      width: 300px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-    li:hover .project-info {
-      display: block;
-      transform: translateX(-10px);
-      opacity: 1;
-    }
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #333;
-      color: #fff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>Your Name - Portfolio</title>
 </head>
 <body>
-  <header>
-    <h1>Your First Name</h1>
-    <p>Welcome to my personal website</p>
-  </header>
-  <div class="container">
-    <section id="about">
-      <h2>About Me</h2>
-      <p>Hello! I'm [Your First Name] and this is my personal website. [Short description about yourself and what you do.]</p>
-    </section>
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li>
-          <h3>CI/CD project</h3>
-          <div class="project-info">
-            <p>A short description of Project 1. More detailed description can go here.</p>
-            <a href="https://github.com/yotamdavid/ferari_finel.git">Learn more</a>
-          </div>
-        </li>
-        <li>
-          <h3>Project 2</h3>
-          <div class="project-info">
-            <p>A short description of Project 2. More detailed description can go here.</p>
-            <a href="project2_link">Learn more</a>
-          </div>
-        </li>
-      </ul>
-    </section>
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <p>I'm available for questions, suggestions, and collaboration:</p>
-      <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
-      <p>Phone: <a href="tel:+123456789">123-456-789</a></p>
-    </section>
-  </div>
-  <footer>
-    <p>All rights reserved &copy; 2023 | [Your First Name]</p>
-  </footer>
-    <script>
-    const projectItems = document.querySelectorAll('.project-item');
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Your Name</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger" onclick="toggleNav()">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
 
-    projectItems.forEach(item => {
-      const projectInfo = item.querySelector('.project-info');
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>Your introduction goes here.</p>
+    </section>
 
-      item.addEventListener('mouseover', () => {
-        projectInfo.style.display = 'block';
-      });
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="project-card" onmouseover="rotateCard(this)" onmouseout="rotateCard(this)">
+            <h3>Project 1</h3>
+            <p>Description of project 1.</p>
+            <a href="#">Learn More</a>
+        </div>
+        <div class="project-card" onmouseover="rotateCard(this)" onmouseout="rotateCard(this)">
+            <h3>Project 2</h3>
+            <p>Description of project 2.</p>
+            <a href="#">Learn More</a>
+        </div>
+    </section>
 
-      item.addEventListener('mouseout', () => {
-        projectInfo.style.display = 'none';
-      });
-    });
-  </script>
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <p>Email: your.email@example.com</p>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
