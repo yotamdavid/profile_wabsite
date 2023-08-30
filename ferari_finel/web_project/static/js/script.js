@@ -8,7 +8,6 @@ function toggleNav() {
 function rotateCard(card) {
     card.classList.toggle('flipped');
 
-    // Toggle the visibility of project descriptions
     var projectDesc = card.querySelector('.project-description');
     var projectDescFlipped = card.querySelector('.project-description-flipped');
 
