@@ -119,7 +119,7 @@ nav {
     align-items: flex-start; /* יישור למעלה */
     max-height: 600px; /* הגבלת גובה מקסימלי */
     overflow: hidden; /* הסתרת חלק מהתמונה */
-    padding-right: 140px; /* מרווח מימין */
+    padding-right: 240px; /* מרווח מימין */
 }
 
 .about-image img {
