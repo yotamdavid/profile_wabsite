@@ -76,3 +76,9 @@ nav {
     transform: translateY(-10px);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
+
+.contact-links a img {
+    width: 40px; /* כאן אתה יכול לשנות את הרוחב */
+    height: 40px; /* כאן אתה יכול לשנות את הגובה */
+    margin: 10px; /* כאן אתה יכול לשנות את הרווח בין הלוגואים */
+}
