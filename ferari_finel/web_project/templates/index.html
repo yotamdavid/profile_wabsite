@@ -112,5 +112,20 @@
   <footer>
     <p>All rights reserved &copy; 2023 | [Your First Name]</p>
   </footer>
+    <script>
+    const projectItems = document.querySelectorAll('.project-item');
+
+    projectItems.forEach(item => {
+      const projectInfo = item.querySelector('.project-info');
+
+      item.addEventListener('mouseover', () => {
+        projectInfo.style.display = 'block';
+      });
+
+      item.addEventListener('mouseout', () => {
+        projectInfo.style.display = 'none';
+      });
+    });
+  </script>
 </body>
 </html>
