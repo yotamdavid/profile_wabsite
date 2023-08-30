@@ -1,7 +1,5 @@
 /* General Styling */
-.about-section,
-#projects,
-#contact {
+.section {
     background-color: #f7f7f7; /* צבע הרקע האפור */
 }
 
