@@ -1,10 +1,10 @@
-/* עיצוב כללי */
+/* General Styling */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* עיצוב הכותרת */
+/* Header Styling */
 header {
     background-color: #333;
     color: white;
@@ -12,7 +12,7 @@ header {
     padding: 1rem 0;
 }
 
-/* עיצוב הניווט */
+/* Navigation Styling */
 nav {
     display: flex;
     justify-content: space-between;
@@ -40,7 +40,7 @@ nav {
     color: #fca311;
 }
 
-/* עיצוב התפריט הנפתח במסך קטן */
+/* Mobile Menu Styling */
 .burger {
     display: none;
     flex-direction: column;
@@ -55,14 +55,14 @@ nav {
     transition: all 0.3s ease;
 }
 
-/* עיצוב סקשן כללי */
+/* General Section Styling */
 .section {
     padding: 80px 10%;
     text-align: center;
     background-color: #f7f7f7;
 }
 
-/* עיצוב כרטיסיית הפרוייקט */
+/* Project Card Styling */
 .project-card {
     background-color: white;
     border-radius: 10px;
@@ -77,7 +77,7 @@ nav {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* הסתובבות על גבי הפרוייקט */
+/* Flipping Animation */
 @keyframes rotate {
     from {
         transform: rotateY(0deg);
@@ -90,7 +90,3 @@ nav {
 .project-card.flipped {
     animation: rotate 0.5s forwards;
 }
-
-/* עיצוב סקריפטים נוספים */
-/* הוסיפו כאן סגנון נוסף אם יש צורך */
-
