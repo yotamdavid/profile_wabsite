@@ -1,4 +1,10 @@
 /* General Styling */
+.about-section,
+#projects,
+#contact {
+    background-color: #f7f7f7; /* צבע הרקע האפור */
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
