@@ -206,3 +206,29 @@ footer {
     background-color: #e88e00;
     transform: translateY(-2px);
 }
+
+#skills {
+    @include section-styling;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 10%;
+}
+
+.category {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(33.33% - 40px); /* עדכן את הרוחב כך שיהיה 3 עמודות בשורה */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
