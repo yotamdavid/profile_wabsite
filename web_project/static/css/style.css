@@ -250,3 +250,30 @@ footer {
 .category-content p {
     margin-top: 5px;
 }
+
+.category-title {
+    cursor: pointer;
+}
+
+.category-content {
+    display: none;
+    padding: 10px;
+    border-top: 1px solid #333;
+}
+
+/* הראיית תוכן כאשר לוחצים על הכותרת */
+.category-title:focus + .category-content {
+    display: block;
+    animation: slide-in 0.3s ease-in-out;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
