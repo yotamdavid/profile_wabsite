@@ -211,8 +211,6 @@ footer {
     @include section-styling;
 }
 
-
-/* סטיילים של הקטגוריות */
 .categories {
     display: flex;
     justify-content: space-between;
@@ -228,7 +226,6 @@ footer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     cursor: pointer;
-    margin: 0 10px;
 }
 
 .category:hover {
@@ -236,40 +233,12 @@ footer {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.category-title {
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
 .category-content {
     display: none;
+    margin-top: 20px;
     padding: 10px;
-    border-top: 1px solid #333;
 }
 
-/* הראיית תוכן כאשר לוחצים על הכותרת */
-.category-title:focus + .category-content {
+.category.active .category-content {
     display: block;
-    animation: slide-in 0.3s ease-in-out;
 }
-
-
-/* אנימציה נוספת עבור תוכן הקטגוריה */
-@keyframes slide-in-content {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-
-
-
-
-
-
