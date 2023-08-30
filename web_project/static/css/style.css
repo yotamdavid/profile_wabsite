@@ -3,6 +3,8 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #f7f7f7;
+    padding: 0;
 }
 
 /* Header Styling */
@@ -65,6 +67,11 @@ h2 {
 }
 
 /* General Section Styling */
+.content-wrapper {
+    margin: 0 40px; /* רווח מצד שמאל ומימין */
+}
+
+/* General Section Styling */
 .section {
     @include section-styling; /* השימוש ב-mixins של section-styling */
     background-color: #f7f7f7; /* צבע הרקע האפור */
@@ -86,11 +93,6 @@ h2 {
 .section + .section {
     margin-top: 80px; /* רווח בין סקשן לסקשן מעליו */
 }
-
-.content-wrapper {
-    margin: 40px; /* רווח חיצוני לאתר */
-}
-
 /* Project Card Styling */
 .project-card {
     background-color: white;
