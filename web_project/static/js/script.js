@@ -13,11 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
         categoryTitle.addEventListener('click', () => {
             categories.forEach(cat => {
                 if (cat !== category) {
-                    cat.classList.remove('active');
+                    cat.classList.remove('category-active'); // שינוי כאן
                 }
             });
-            
-            category.classList.toggle('active');
+
+            category.classList.toggle('category-active'); // שינוי כאן
         });
     });
 });
+
