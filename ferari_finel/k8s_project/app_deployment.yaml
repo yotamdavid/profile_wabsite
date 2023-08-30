@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask-app
+          image: yotamdavid/app_ferari:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MYSQL_HOST
+              value: mysql-service  # Update with the name of your MySQL service
+            - name: MYSQL_USER
+              value: root  # Replace with your MySQL username
+            - name: MYSQL_PASSWORD
+              value: yotam  # Replace with your MySQL password
+            - name: MYSQL_DATABASE
+              value: users  # Replace with your MySQL database name
+          resources:
+            requests:
+              cpu: "500m"   # Minimum required CPU
+              memory: "1Gi"  # Increased memory to 2Gi
+            limits:
+              cpu: "1000m"   # Maximum allowed CPU
+              memory: "2Gi"  # Increased memory to 4Gi

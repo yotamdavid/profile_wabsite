@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>הרשמה</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>הרשמה</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="/register">
+        <label for="username">שם משתמש:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">סיסמה:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        {% if 'password_requirements' in session %}
+            <p class="password-requirements">{{ session['password_requirements'] }}</p>
+        {% endif %}
+        <input type="submit" value="הרשם">
+    </form>
+</body>
+</html>
