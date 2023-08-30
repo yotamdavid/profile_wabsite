@@ -99,33 +99,30 @@ nav {
     transform: translateY(-2px);
 }
 
-/* About Me Section Styling */
 .about-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 80px 10%;
-    flex-direction: row; /* New addition */
+    padding: 40px 10%;
+    flex-direction: row-reverse;
 }
 
 .about-text {
-    width: 50%; /* New addition */
-    padding-right: 50px; /* New addition */
-    box-sizing: border-box; /* New addition */
+    width: 50%; /* חצי הרוחב לטקסט */
+    padding-right: 20px; /* הזזה ימינה */
 }
 
 .about-image {
-    width: 50%; /* New addition */
-    position: relative; /* New addition */
+    width: 50%; /* חצי הרוחב לתמונה */
+    display: flex;
+    justify-content: flex-end; /* יישור לצד ימין */
+    align-items: flex-start; /* יישור למעלה */
 }
 
 .about-image img {
     width: 100%;
     max-height: 300px;
     animation: slide-in 1s ease-out;
-    position: absolute; /* New addition */
-    right: 0; /* New addition */
-    bottom: 0; /* New addition */
 }
 
 /* Keyframes Animation */
