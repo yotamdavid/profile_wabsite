@@ -246,3 +246,7 @@ footer {
 .category-content h4 {
     margin-top: 20px;
 }
+
+.category-content p {
+    margin-top: 5px;
+}
