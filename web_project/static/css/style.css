@@ -207,6 +207,16 @@ footer {
     transform: translateY(-2px);
 }
 
+#contact {
+    @include section-styling;
+        /* הגדרת ה-GIF כרקע */
+    background-image: url('https://dytvr9ot2sszz.cloudfront.net/wp-content/uploads/2020/11/pulse-128D-1.gif');
+    background-size: cover; /* התאמת התמונה לגודל האלמנט */
+    background-repeat: no-repeat; /* מניעת חזרה של התמונה */
+    background-position: center center; /* מיקום התמונה במרכז האלמנט */
+}
+
+
 #projects {
     @include section-styling;
         /* הגדרת ה-GIF כרקע */
