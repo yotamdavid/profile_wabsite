@@ -70,7 +70,7 @@ h2 {
 /* General Section Styling */
 .section {
     @include section-styling; /* השימוש ב-mixins של section-styling */
-    background-color: #333; /* צבע הרקע האפור */
+    background-color: #f7f7f7; /* צבע הרקע האפור */
     padding: 80px 10%;
     text-align: center;
     border-radius: 10px;
