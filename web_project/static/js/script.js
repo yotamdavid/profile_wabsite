@@ -9,19 +9,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const educationCategory = document.getElementById('education-category');
     const militaryCategory = document.getElementById('military-category');
 
-    skillsCategory.addEventListener('click', () => toggleCategory(skillsCategory));
-    educationCategory.addEventListener('click', () => toggleCategory(educationCategory));
-    militaryCategory.addEventListener('click', () => toggleCategory(militaryCategory));
+    skillsCategory.addEventListener('click', () => showCategoryInfo(skillsCategory));
+    educationCategory.addEventListener('click', () => showCategoryInfo(educationCategory));
+    militaryCategory.addEventListener('click', () => showCategoryInfo(militaryCategory));
 
-    function toggleCategory(category) {
+    function showCategoryInfo(category) {
         const categories = document.querySelectorAll('.category');
         categories.forEach(cat => {
-            if (cat === category) {
-                cat.classList.toggle('active');
-            } else {
-                cat.classList.remove('active');
-            }
+            cat.classList.remove('active');
         });
-    }
-});
 
+        category.classList.add('active');
+    }
+}); 
