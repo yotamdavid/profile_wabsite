@@ -210,7 +210,7 @@ footer {
 #skills {
     @include section-styling;
         /* הגדרת ה-GIF כרקע */
-    background-image: url('https://www.palo-it.com/hubfs/Infinito_DevOps_2-2.gif');
+    background-image: url('https://academy.autorabit.com/wp-content/uploads/2021/02/ezgif-7-5fd34c9ec857.gif');
     background-size: cover; /* התאמת התמונה לגודל האלמנט */
     background-repeat: no-repeat; /* מניעת חזרה של התמונה */
     background-position: center center; /* מיקום התמונה במרכז האלמנט */
