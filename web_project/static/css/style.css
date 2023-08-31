@@ -210,7 +210,7 @@ footer {
 #skills {
     @include section-styling;
         /* הגדרת ה-GIF כרקע */
-    background-image: url('https://i.gifer.com/7GW5.gif');
+    background-image: url('https://www.globalsign.com/application/files/8716/8451/0374/Devsecops_GIF.gif');
     background-size: cover; /* התאמת התמונה לגודל האלמנט */
     background-repeat: no-repeat; /* מניעת חזרה של התמונה */
     background-position: center center; /* מיקום התמונה במרכז האלמנט */
