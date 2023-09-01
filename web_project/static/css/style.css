@@ -296,3 +296,32 @@ footer {
     }
 }
 
+.typing-animation {
+    font-size: 24px;
+    color: orange;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid #666;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    display: inline-block;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #666;
+    }
+}
+
+
