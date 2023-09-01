@@ -22,3 +22,30 @@ document.addEventListener('DOMContentLoaded', function () {
         category.classList.add('active');
     }
 }); 
+
+let lastClickedCategory = null;
+
+function showCategoryInfo(category) {
+    const categories = document.querySelectorAll('.category');
+    categories.forEach(cat => {
+        cat.classList.remove('active');
+    });
+
+    if (lastClickedCategory !== category) {
+        category.classList.add('active');
+        lastClickedCategory = category;
+    } else {
+        lastClickedCategory = null;
+    }
+
+    updateOrangeStripePosition();
+}
+
+function updateOrangeStripePosition() {
+    const activeCategory = document.querySelector('.category.active');
+    const orangeStripe = activeCategory.querySelector('.category-orange-stripe');
+    if (orangeStripe) {
+        orangeStripe.style.transform = activeCategory ? 'translateY(0)' : 'translateY(100%)';
+    }
+}
+
