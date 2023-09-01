@@ -298,12 +298,16 @@ footer {
 
 .typing-animation {
     font-size: 24px;
-    color: orange;
     white-space: nowrap;
     overflow: hidden;
     border-right: 0.15em solid #666;
     animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
     display: inline-block;
+}
+
+.typing-animation::before {
+    content: "Dev-Ops Engineer";
+    color: #FFA500; /* כתום */
 }
 
 @keyframes typing {
@@ -323,6 +327,3 @@ footer {
         border-color: #666;
     }
 }
-
-
-
