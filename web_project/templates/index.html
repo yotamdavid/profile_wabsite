@@ -121,8 +121,9 @@
         </div>
     </section>
 
-    <section id="contact" class="section">
-        <h2>Contact Me</h2>
+<section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <div class="contact-container">
         <div class="contact-links">
             <a href="https://www.linkedin.com/in/yotam-david-a3b769275/" target="_blank">
                 <img src="https://www.freeiconspng.com/thumbs/linkedin-logo-png/linkedin-logo-1.png" alt="LinkedIn Logo">
@@ -134,8 +135,24 @@
                 <img src="https://assets.stickpng.com/images/5a452601546ddca7e1fcbc87.png" alt="Phone Logo">
             </a>
         </div>
-        <a href="{{ url_for('static', filename='files/CV - Yotam David (2).pdf') }}" class="button-link-cv">View CV</a>
-    </section>
+        <div class="contact-form">
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <a href="{{ url_for('static', filename='files/CV - Yotam David (2).pdf') }}" class="button-link-cv">View CV</a>
+</section>
+
 
     <!-- FOOTER -->
     <footer>
