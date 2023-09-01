@@ -192,19 +192,21 @@ footer {
 }
 
 .button-link-cv {
-    display: inline-block;
-    background-color: #fca311;
-    color: #333333;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  background-color: #FFA500; /* צבע כתום */
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
     margin-top: 40px; /* רווח מלמעלה */
 }
 
 .button-link-cv:hover {
-    background-color: #e88e00;
-    transform: translateY(-2px);
+  background-color: #FFD700; /* צבע כתום בהתעלמות */
 }
 
 #projects {
