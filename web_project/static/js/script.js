@@ -5,20 +5,24 @@ function toggleNav() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const skillsCategory = document.getElementById('skills-category');
-    const educationCategory = document.getElementById('education-category');
-    const militaryCategory = document.getElementById('military-category');
+    const categories = document.querySelectorAll('.category');
 
-    skillsCategory.addEventListener('click', () => showCategoryInfo(skillsCategory));
-    educationCategory.addEventListener('click', () => showCategoryInfo(educationCategory));
-    militaryCategory.addEventListener('click', () => showCategoryInfo(militaryCategory));
+    categories.forEach(category => {
+        const toggleButton = category.querySelector('.category-toggle-button');
+        toggleButton.addEventListener('click', () => toggleCategory(category));
+    });
 
-    function showCategoryInfo(category) {
-        const categories = document.querySelectorAll('.category');
-        categories.forEach(cat => {
-            cat.classList.remove('active');
-        });
+    function toggleCategory(category) {
+        const categoryContent = category.querySelector('.category-content');
+        const toggleButton = category.querySelector('.category-toggle-button');
 
-        category.classList.add('active');
+        if (categoryContent.style.display === 'block') {
+            categoryContent.style.display = 'none';
+            toggleButton.textContent = 'Toggle';
+        } else {
+            categoryContent.style.display = 'block';
+            toggleButton.textContent = 'Toggle';
+        }
     }
-}); 
+});
+
