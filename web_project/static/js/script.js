@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-const textArray = [" Dev-Ops Engineer "];
+const textArray = ["Dev-Ops Engineer"];
 let textIndex = 0;
 let charIndex = 0;
 const typedText = document.getElementById('typed-text');
