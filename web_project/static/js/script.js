@@ -5,18 +5,20 @@ function toggleNav() {
 }
  
 document.addEventListener('DOMContentLoaded', function () {
-    const categories = document.querySelectorAll('.category');
+    const skillsCategory = document.getElementById('skills-category');
+    const educationCategory = document.getElementById('education-category');
+    const militaryCategory = document.getElementById('military-category');
 
-    categories.forEach(category => {
-        const toggleButton = category.querySelector('.category-toggle-button');
-        toggleButton.addEventListener('click', () => toggleCategory(category));
-    });
+    skillsCategory.addEventListener('click', () => showCategoryInfo(skillsCategory));
+    educationCategory.addEventListener('click', () => showCategoryInfo(educationCategory));
+    militaryCategory.addEventListener('click', () => showCategoryInfo(militaryCategory));
 
-    function toggleCategory(category) {
-        const categoryContent = category.querySelector('.category-content');
-        const toggleButton = category.querySelector('.category-toggle-button');
-        
-        categoryContent.classList.toggle('active');
-        toggleButton.textContent = categoryContent.classList.contains('active') ? 'Close' : 'Open';
+    function showCategoryInfo(category) {
+        const categories = document.querySelectorAll('.category');
+        categories.forEach(cat => {
+            cat.classList.remove('active');
+        });
+
+        category.classList.add('active');
     }
 });
