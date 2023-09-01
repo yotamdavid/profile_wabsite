@@ -225,6 +225,15 @@ footer {
     background-position: center center; /* מיקום התמונה במרכז האלמנט */
 }
 
+#contact {
+    @include section-styling;
+        /* הגדרת ה-GIF כרקע */
+    background-image: url('https://qph.cf2.quoracdn.net/main-qimg-1d32667bf12f2ff2b6a4efab8e8a6806');
+    background-size: cover; /* התאמת התמונה לגודל האלמנט */
+    background-repeat: no-repeat; /* מניעת חזרה של התמונה */
+    background-position: center center; /* מיקום התמונה במרכז האלמנט */
+}
+
 .categories {
     display: flex;
     justify-content: space-between;
