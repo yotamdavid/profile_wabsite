@@ -278,13 +278,3 @@ footer {
 .category-content p {
     margin-top: 5px;
 }
-
-.category-toggle-button {
-    cursor: pointer;
-    color: blue;
-    margin-top: 10px;
-}
-
-.category-toggle-button:hover {
-    text-decoration: underline;
-}
