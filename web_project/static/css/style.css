@@ -257,6 +257,19 @@ footer {
     display: block;
 }
 
+.category::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: orange; /* או צבע הכתום שאתה רוצה */
+    border-radius: 0px 0px 10px 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
 .category-content h4 {
     margin-top: 20px;
 }
