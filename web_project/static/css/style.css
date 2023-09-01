@@ -240,6 +240,7 @@ footer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     cursor: pointer;
+    position: relative; /* הוסף שורה זו כדי לאפשר הצמדה יחסית */
 }
 
 .category:hover {
