@@ -278,3 +278,21 @@ footer {
 .category-content p {
     margin-top: 5px;
 }
+
+.animated-title {
+    font-size: 36px;
+    color: #333;
+    animation: fadeInDown 1s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
