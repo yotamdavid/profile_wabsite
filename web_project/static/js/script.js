@@ -5,23 +5,20 @@ function toggleNav() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const categories = document.querySelectorAll('.category');
-    let lastClickedCategory = null;
+    const skillsCategory = document.getElementById('skills-category');
+    const educationCategory = document.getElementById('education-category');
+    const militaryCategory = document.getElementById('military-category');
 
-    categories.forEach(category => {
-        category.addEventListener('click', () => toggleCategory(category));
-    });
+    skillsCategory.addEventListener('click', () => showCategoryInfo(skillsCategory));
+    educationCategory.addEventListener('click', () => showCategoryInfo(educationCategory));
+    militaryCategory.addEventListener('click', () => showCategoryInfo(militaryCategory));
 
-    function toggleCategory(category) {
-        if (lastClickedCategory === category) {
-            category.classList.toggle('active');
-        } else {
-            categories.forEach(cat => {
-                cat.classList.remove('active');
-            });
-            category.classList.add('active');
-        }
+    function showCategoryInfo(category) {
+        const categories = document.querySelectorAll('.category');
+        categories.forEach(cat => {
+            cat.classList.remove('active');
+        });
 
-        lastClickedCategory = category;
+        category.classList.add('active');
     }
-});
+}); 
