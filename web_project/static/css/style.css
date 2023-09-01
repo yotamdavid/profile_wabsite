@@ -278,21 +278,3 @@ footer {
 .category-content p {
     margin-top: 5px;
 }
-
-.contact-form {
-    text-align: right;
-}
-
-#contact-form label, #contact-form input, #contact-form textarea {
-    display: block;
-    margin-bottom: 10px;
-    width: 100%;
-}
-
-#contact-form button {
-    background-color: blue;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
