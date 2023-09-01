@@ -281,7 +281,7 @@ footer {
 
 .animated-title {
     font-size: 36px;
-    color: #333;
+    color: orange;
     animation: fadeInDown 1s ease-out;
 }
 
