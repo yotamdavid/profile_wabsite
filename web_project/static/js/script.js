@@ -23,23 +23,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const contactForm = document.getElementById('contact-form');
 
-    contactForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const formData = new FormData(contactForm);
-        const formDataObject = {};
-        
-        formData.forEach((value, key) => {
-            formDataObject[key] = value;
-        });
-
-        // Send formDataObject to server or process it as needed
-        console.log(formDataObject);
-
-        // Reset the form
-        contactForm.reset();
-    });
-});
