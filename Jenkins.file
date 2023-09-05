@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        EC2_IP_TEST = "18.232.77.173"
+        EC2_IP_PROD = "54.166.202.143"
+    }
     
     triggers {
         pollSCM('*/1 * * * *')
