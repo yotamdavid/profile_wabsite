@@ -13,7 +13,7 @@ sudo yum install git -y
 sudo yum install python3-pip -y
 
 # Change to project directory
-cd /home/ec2-user/ferari_website/web_project
+cd /home/ec2-user/profile_wabsite/web_project
 
 # Install Flask
 sudo pip3 install flask
