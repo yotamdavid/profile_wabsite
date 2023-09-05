@@ -1,106 +1,69 @@
 pipeline {
     agent any
     
+    triggers {
+        pollSCM('*/1 * * * *')
+    }
+
     stages {
-        stage('Clean Up') {
+        stage('Cleanup') {
             steps {
-                // Clean Up Project Files And Clone Git - To Update The Project
-                sh 'rm -rf ferari_docker/'
-                sh 'git clone https://github.com/yotamdavid/ferari_docker.git'
-                dir('ferari_docker/web_project/') {
-                    // Deletes Previous Docker Images
-                    sh 'docker rmi -f yotamdavid/app_ferari:latest'
-                }
+                sh 'echo "Performing cleanup..."'
+                sh 'rm -rf profile_wabsite'
             }
         }
 
-        stage('Build And Push The Image To Docker Hub') {
+        
+        stage('Build Image') {
             steps {
-                dir('ferari_docker/web_project') {
-                    // Creates Docker Image
-                    sh "docker build -t yotamdavid/app_ferari:1.${BUILD_NUMBER} -t yotamdavid/app_ferari:latest ."
+                script {
+                sh 'docker login -u yotamdavid -p yotyot0202'
+                sh 'git clone https://github.com/yotamdavid/profile_wabsite.git'
+                dir('profile_wabsite/web_project') {
+                    sh 'docker build -t yotamdavid/profile_wabsite:1.0 .'
                 }
-                // Pushes Docker Image To Docker Hub
-                sh 'docker push yotamdavid/app_ferari:1.${BUILD_NUMBER}'
-                sh 'docker push yotamdavid/app_ferari:latest'
-
-                // Cleanup old Docker images
-                sh "docker image ls --format '{{.ID}}' yotamdavid/app_ferari --filter 'dangling=false' | sort -r | awk 'NR>4' | xargs -I {} docker image rm -f {}"            
-            }
-        }
-
-        stage('Creating a Cluster') {
-            steps {
-                // Runs tests from the main machine on the website
-                dir('ferari_docker/web_project') {
-                    sh 'rm -rf terraform'
-                    sh 'git clone https://github.com/yotamdavid/terraform.git'
-                    dir('terraform') {
-                        sh 'terraform init'
-                        sh 'terraform apply -auto-approve'
-                    }
-                }
-            }
-        }
-
-        stage('Running k8s On Test Server') {
-            steps {
-                // Runs tests from the main machine on the website
-                sh 'gcloud container clusters get-credentials test-cluster --project golden-system-393111 --region us-central1'
-                sh 'rm -rf k8s_project'
-                sh 'git clone https://github.com/yotamdavid/k8s_project.git'
-                dir('k8s_project') {
-                    sh 'kubectl apply -f db-deploy.yml'
-                    sh 'kubectl apply -f db-service.yml'
-                    sh 'kubectl apply -f app_deployment.yaml'
-                    sh 'kubectl apply -f app_service.yaml '
-                    sh 'chmod +x update_db.sh'
-                    sh './update_db.sh'
-                    sh 'chmod +x test.sh'
-                    sh './test.sh'
-                    sh 'kubectl delete pods --all'
-                    sh 'kubectl delete services --all'
-                    sh 'kubectl delete deployments --all'
                 }
             }
         }
         
-        stage('Destroy Test Server') {
+        stage('Run Container and test') {
             steps {
-                dir('ferari_docker/web_project/terraform') {
-                    sh 'terraform init'
-                    sh 'terraform destroy -auto-approve'
+                script {
+                    def containerId = sh(returnStdout: true, script: 'docker run -it -p 5000:5000 -d yotamdavid/profile_wabsite:1.0').trim()
+                    sh "docker exec $containerId bash test.sh"
+                    sh "docker stop $containerId"
                 }
             }
         }
 
-        stage('Running k8s On Prod Server') {
+        
+        stage('Deploy to DockerHub') {
             steps {
-                // Runs tests from the main machine on the website
-                sh 'gcloud container clusters get-credentials ferari-web2 --project golden-system-393111 --region us-east1-b'
-                dir('k8s_project') {
-                    sh 'kubectl apply -f db-deploy.yml'
-                    sh 'kubectl apply -f db-service.yml'
-                    sh 'kubectl apply -f app_deployment.yaml'
-                    sh 'kubectl apply -f app_service.yaml '
-                    sh 'chmod +x update_db.sh'
-                    sh './update_db.sh'
+                script {
+                    sh 'docker push yotamdavid/profile_wabsite:1.0'
                 }
             }
         }
-        stage('set a monitoring grafana') {
+        
+        stage('Upload to ec2-prod') {
             steps {
-                sh 'gcloud container clusters get-credentials ferari-web2 --project golden-system-393111 --region us-east1-b'
-                sh 'kubectl create namespace monitoring'
-                sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
-                sh 'helm repo update'
-                sh 'helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring'
-                sh 'kubectl get pods -n monitoring'
-                sh 'kubectl get svc -n monitoring'
-                sh 'nohup kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090 &'
-                sh 'echo "now edit the grafana service from ClusterIP to LoadBalancer"'
-                sh 'echo "The monitor has been set up successfully"'
-
+                script {
+                    withCredentials([
+                        usernamePassword(credentialsId: 'yotamP', usernameVariable: 'SSH_USER', passwordVariable: 'SSH_PASSWORD')
+                    ]) {
+                        sh """
+                        echo "upload..."
+                        sshpass -p '$SSH_PASSWORD' ssh -o PreferredAuthentications=password -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null yotam@192.168.56.103 '
+                            cd /home/yotam/Desktop/ &&
+                            echo "running.." &&
+                            sudo -S rm -rf ansible <<< "$SSH_PASSWORD" &&
+                            git clone https://github.com/yotamdavid/ansible.git &&
+                            cd /home/yotam/Desktop/ansible/ansible &&
+                            sudo -S ansible-playbook -i inventory.ini my_playbook.yml <<< "$SSH_PASSWORD"
+                        '
+                        """
+                    }
+                }
             }
         }
     }
