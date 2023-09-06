@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment {
         EC2_IP_TEST = "23.20.204.99"
-        EC2_IP_PROD = "54.242.16.8"
+        EC2_IP_PROD1 = "44.205.21.228"
+        EC2_IP_PROD2 = "54.242.16.8"
     }
     
     triggers {
@@ -51,8 +52,8 @@ pipeline {
                 }
             }
         }
-
-        stage('Upload to ec2-prod') {
+        
+                stage('Upload to ec2-prod1') {
             steps {
                 script {
                     withCredentials([
@@ -60,9 +61,32 @@ pipeline {
                     ]) {
                         sh """
                         echo "upload..."
-                        scp -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null profile_wabsite.tar.gz $SSH_USER@$EC2_IP_PROD:/home/ec2-user/
-                        scp -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ansible.tar.gz $SSH_USER@$EC2_IP_PROD:/home/ec2-user/
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $SSH_USER@$EC2_IP_PROD '
+                        scp -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null profile_wabsite.tar.gz $SSH_USER@$EC2_IP_PROD1:/home/ec2-user/
+                        scp -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ansible.tar.gz $SSH_USER@$EC2_IP_PROD1:/home/ec2-user/
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $SSH_USER@$EC2_IP_PROD1 '
+                        sudo tar -xzf profile_wabsite.tar.gz
+                        sudo tar -xzf ansible.tar.gz
+                        sudo chmod +x ansible/ansible/setup.sh
+                        sudo ./ansible/ansible/setup.sh
+                        exit
+                        '
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Upload to ec2-prod2') {
+            steps {
+                script {
+                    withCredentials([
+                        sshUserPrivateKey(credentialsId: 'ec2-prod', keyFileVariable: 'SSH_KEY', passphraseVariable: '', usernameVariable: 'SSH_USER')
+                    ]) {
+                        sh """
+                        echo "upload..."
+                        scp -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null profile_wabsite.tar.gz $SSH_USER@$EC2_IP_PROD2:/home/ec2-user/
+                        scp -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ansible.tar.gz $SSH_USER@$EC2_IP_PROD2:/home/ec2-user/
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $SSH_USER@$EC2_IP_PROD2 '
                         sudo tar -xzf profile_wabsite.tar.gz
                         sudo tar -xzf ansible.tar.gz
                         sudo chmod +x ansible/ansible/setup.sh
