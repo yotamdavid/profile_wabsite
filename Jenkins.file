@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        EC2_IP_TEST = "18.232.77.173"
-        EC2_IP_PROD = "3.86.4.72"
+        EC2_IP_TEST = "23.20.204.99"
+        EC2_IP_PROD = "54.242.16.8"
     }
     
     triggers {
