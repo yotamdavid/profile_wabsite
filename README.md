@@ -3,7 +3,7 @@
 Using the Jenkins.file the building, testing, deploying the profile website using ansible and AWS. <br />
 
 ## AWS Environment
-![image](https://github.com/yotamdavid/profile_wabsite/blob/8bd09de2c3dde6190e947283ee94037998f318dd/aws-env.jpg)
+![image](https://github.com/yotamdavid/profile_wabsite/blob/e0bfbba2034cf209f983b4f1237e69913ed31a73/aws-env%20(1).jpg)
 
 **Vpc**: Set up your vpc - go to vpc to your vpcs and create a new vpc, you will also need to create internet gatweyas and link it to your vpc.
 
