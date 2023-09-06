@@ -9,7 +9,7 @@ Using the Jenkins.file the building, testing, deploying the profile website with
 
 ✅**Security Group**: Define a new security group for the vpc you created and include in it everything your application needs in terms of Inbound rules and Outbound rules.
 
-✅**Subnets**: Go to subnets and create subnets in different areas and associate them with the vpc you created, you also need to create a route table and link it to your subnets.
+✅**Subnets**: Go to subnets and create subnets in different zones and associate them with the vpc you created, you also need to create a route table and link it to your subnets.
 
 ✅**Ec2-instances**: Go to ec2 instances and create two instances when you create them, don't forget to connect them to the vpc you created and each of them will connect to a subnet in a different area you created (one of the instances to a subnet in zone A and one to a subnet in zone B)
 
