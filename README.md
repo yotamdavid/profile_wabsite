@@ -1,4 +1,4 @@
-# CI/CD Project
+# Profile Web Project
 
 Using the Jenkins.file the building, testing, deploying the profile website with ansible to AWS. <br />
 
