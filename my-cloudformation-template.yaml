@@ -1,0 +1,157 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create VPC, Subnets, EC2 Instances, Security Groups, and ELB
+
+Resources:
+  MyVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: MyVPC
+      InternetGatewayId:
+        Ref: InternetGateway
+
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Security Group for My Application"
+      VpcId:
+        Ref: MyVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5000
+          ToPort: 5000
+          CidrIp: 0.0.0.0/0  # Adjust this as needed for your application
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+
+  SubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: MyVPC
+      AvailabilityZone: us-east-1a  # Change the availability zone as needed
+      CidrBlock: "10.0.0.0/24"
+
+  SubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: MyVPC
+      AvailabilityZone: us-east-1b  # Change the availability zone as needed
+      CidrBlock: "10.0.1.0/24"
+
+  MyRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: MyVPC
+
+  SubnetARouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId:
+        Ref: SubnetA
+      RouteTableId:
+        Ref: MyRouteTable
+
+  SubnetBRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId:
+        Ref: SubnetB
+      RouteTableId:
+        Ref: MyRouteTable
+
+  EC2InstanceA:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      SubnetId:
+        Ref: SubnetA
+      SecurityGroupIds:
+        - Ref: MySecurityGroup
+
+  EC2InstanceB:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      SubnetId:
+        Ref: SubnetB
+      SecurityGroupIds:
+        - Ref: MySecurityGroup
+
+  MyTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: "MyTargetGroup"
+      Port: 5000  # Listen on port 5000
+      Protocol: HTTP
+      VpcId:
+        Ref: MyVPC
+      HealthCheckProtocol: HTTP
+      HealthCheckPort: 5000  # Health check on port 5000
+      HealthCheckPath: "/"
+
+  MyLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: "MyLoadBalancer"
+      Subnets:
+        - Ref: SubnetA
+        - Ref: SubnetB
+      SecurityGroups:
+        - Ref: MySecurityGroup
+      Scheme: internet-facing
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: "60"
+      Tags:
+        - Key: Name
+          Value: "MyLoadBalancer"
+
+  MyListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: fixed-response
+          FixedResponseConfig:
+            ContentType: text/plain
+            StatusCode: 200
+            ContentType: "OK"
+      LoadBalancerArn:
+        Ref: MyLoadBalancer
+      Port: 80  # Forward traffic from port 80
+      Protocol: HTTP
+
+Outputs:
+  VPCId:
+    Value:
+      Ref: MyVPC
+  SubnetAId:
+    Value:
+      Ref: SubnetA
+  SubnetBId:
+    Value:
+      Ref: SubnetB
+  InstanceAId:
+    Value:
+      Ref: EC2InstanceA
+  InstanceBId:
+    Value:
+      Ref: EC2InstanceB
+  LoadBalancerDNS:
+    Value:
+      Fn::GetAtt:
+        - MyLoadBalancer
+        - DNSName
