@@ -7,15 +7,6 @@ resource "aws_vpc" "my_vpc" {
   enable_dns_hostnames = true
 }
 
-# הגדרת Internet Gateway
-resource "aws_internet_gateway" "my_internet_gateway" {}
-
-# קישור ה-Internet Gateway ל-VPC
-resource "aws_vpc_attachment" "my_vpc_attachment" {
-  vpc_id = aws_vpc.my_vpc.id
-  internet_gateway_id = aws_internet_gateway.my_internet_gateway.id
-}
-
 # הגדרת Security Group
 resource "aws_security_group" "my_security_group" {
   name = "Security Group for My Application"
