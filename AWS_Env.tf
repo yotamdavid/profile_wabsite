@@ -1,5 +1,3 @@
-# קובץ מסוים ל Terraform, לצורך יצירת VPC, Subnets, EC2 Instances, Security Groups, ו-ELB ב-AWS
-
 # הגדרת VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block          = "10.0.0.0/16"
@@ -18,7 +16,7 @@ resource "aws_vpc_attachment" "my_vpc_attachment" {
 
 # הגדרת Security Group
 resource "aws_security_group" "my_security_group" {
-  name = "Security Group for My Application"
+  name = "SecurityGroupForMyApplication"
   vpc_id = aws_vpc.my_vpc.id
 
   # Inbound rules
@@ -26,7 +24,7 @@ resource "aws_security_group" "my_security_group" {
     from_port   = 5000
     to_port     = 5000
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Adjust this as needed for your application
+    cidr_blocks = ["0.0.0.0/0"]  # כדאי להתאים את זה לצרכים שלך
   }
 
   # Outbound rules (allow all traffic)
@@ -42,13 +40,13 @@ resource "aws_security_group" "my_security_group" {
 resource "aws_subnet" "subnet_a" {
   vpc_id           = aws_vpc.my_vpc.id
   cidr_block       = "10.0.0.0/24"
-  availability_zone = "us-east-1a"  # Change the availability zone as needed
+  availability_zone = "us-east-1a"  # שנה את האזור כרצונך
 }
 
 resource "aws_subnet" "subnet_b" {
   vpc_id           = aws_vpc.my_vpc.id
   cidr_block       = "10.0.1.0/24"
-  availability_zone = "us-east-1b"  # Change the availability zone as needed
+  availability_zone = "us-east-1b"  # שנה את האזור כרצונך
 }
 
 # הגדרת Route Table
@@ -69,17 +67,17 @@ resource "aws_subnet_route_table_association" "subnet_b_association" {
 
 # הגדרת EC2 Instances
 resource "aws_instance" "ec2_instance_a" {
-  ami           = var.ami_id  # השתמש במשתנה (variable) שמכיל AMI ID
+  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet_a.id
-  security_groups = [aws_security_group.my_security_group.name]
+  security_groups = [aws_security_group.my_security_group.id]
 }
 
 resource "aws_instance" "ec2_instance_b" {
-  ami           = var.ami_id  # השתמש במשתנה (variable) שמכיל AMI ID
+  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet_b.id
-  security_groups = [aws_security_group.my_security_group.name]
+  security_groups = [aws_security_group.my_security_group.id]
 }
 
 # הגדרת Target Group
