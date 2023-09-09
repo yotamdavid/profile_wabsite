@@ -103,14 +103,8 @@ resource "aws_lb" "my_load_balancer" {
   security_groups    = [aws_security_group.my_security_group.id]
   load_balancer_type = "application"
   enable_deletion_protection = false
-
   enable_http2               = true
-  enable_deletion_protection = false
   idle_timeout               = 60
-
-  enable_deletion_protection = false
-  enable_http2               = true
-  enable_deletion_protection = false
 
   tags = {
     Name = "MyLoadBalancer"
@@ -133,7 +127,3 @@ resource "aws_lb_listener" "my_listener" {
     }
   }
 }
-
-# פלטפורמה: AWS
-#   Stack Name: MyStackName
-#   Date: 2023-09-09
