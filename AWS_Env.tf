@@ -57,12 +57,12 @@ resource "aws_route_table" "my_route_table" {
 }
 
 # הגדרת SubnetRouteTableAssociation
-resource "aws_subnet_route_table_association" "subnet_a_association" {
+resource "aws_route_table_association" "subnet_a_association" {
   subnet_id      = aws_subnet.subnet_a.id
   route_table_id = aws_route_table.my_route_table.id
 }
 
-resource "aws_subnet_route_table_association" "subnet_b_association" {
+resource "aws_route_table_association" "subnet_b_association" {
   subnet_id      = aws_subnet.subnet_b.id
   route_table_id = aws_route_table.my_route_table.id
 }
@@ -105,10 +105,6 @@ resource "aws_lb" "my_load_balancer" {
   enable_deletion_protection = false
   enable_http2               = true
   idle_timeout               = 60
-
-  tags = {
-    Name = "MyLoadBalancer"
-  }
 }
 
 # הגדרת Listener
@@ -119,11 +115,5 @@ resource "aws_lb_listener" "my_listener" {
 
   default_action {
     type = "fixed-response"
-
-    fixed_response {
-      content_type = "text/plain"
-      status_code  = "200"
-      content      = "OK"
-    }
   }
 }
