@@ -2,9 +2,18 @@
 
 # הגדרת VPC
 resource "aws_vpc" "my_vpc" {
-  cidr_block = "10.0.0.0/16"
-  enable_dns_support = true
+  cidr_block          = "10.0.0.0/16"
+  enable_dns_support  = true
   enable_dns_hostnames = true
+}
+
+# הגדרת Internet Gateway
+resource "aws_internet_gateway" "my_internet_gateway" {}
+
+# קישור ה-Internet Gateway ל-VPC
+resource "aws_vpc_attachment" "my_vpc_attachment" {
+  vpc_id             = aws_vpc.my_vpc.id
+  internet_gateway_id = aws_internet_gateway.my_internet_gateway.id
 }
 
 # הגדרת Security Group
@@ -31,14 +40,14 @@ resource "aws_security_group" "my_security_group" {
 
 # הגדרת Subnets
 resource "aws_subnet" "subnet_a" {
-  vpc_id     = aws_vpc.my_vpc.id
-  cidr_block = "10.0.0.0/24"
+  vpc_id           = aws_vpc.my_vpc.id
+  cidr_block       = "10.0.0.0/24"
   availability_zone = "us-east-1a"  # Change the availability zone as needed
 }
 
 resource "aws_subnet" "subnet_b" {
-  vpc_id     = aws_vpc.my_vpc.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id           = aws_vpc.my_vpc.id
+  cidr_block       = "10.0.1.0/24"
   availability_zone = "us-east-1b"  # Change the availability zone as needed
 }
 
@@ -48,26 +57,26 @@ resource "aws_route_table" "my_route_table" {
 }
 
 # הגדרת SubnetRouteTableAssociation
-resource "aws_route_table_association" "subnet_a_association" {
+resource "aws_subnet_route_table_association" "subnet_a_association" {
   subnet_id      = aws_subnet.subnet_a.id
   route_table_id = aws_route_table.my_route_table.id
 }
 
-resource "aws_route_table_association" "subnet_b_association" {
+resource "aws_subnet_route_table_association" "subnet_b_association" {
   subnet_id      = aws_subnet.subnet_b.id
   route_table_id = aws_route_table.my_route_table.id
 }
 
 # הגדרת EC2 Instances
 resource "aws_instance" "ec2_instance_a" {
-  ami           = "your-ami-id"
+  ami           = var.ami_id  # השתמש במשתנה (variable) שמכיל AMI ID
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet_a.id
   security_groups = [aws_security_group.my_security_group.name]
 }
 
 resource "aws_instance" "ec2_instance_b" {
-  ami           = "your-ami-id"
+  ami           = var.ami_id  # השתמש במשתנה (variable) שמכיל AMI ID
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet_b.id
   security_groups = [aws_security_group.my_security_group.name]
@@ -94,8 +103,14 @@ resource "aws_lb" "my_load_balancer" {
   security_groups    = [aws_security_group.my_security_group.id]
   load_balancer_type = "application"
   enable_deletion_protection = false
+
   enable_http2               = true
+  enable_deletion_protection = false
   idle_timeout               = 60
+
+  tags = {
+    Name = "MyLoadBalancer"
+  }
 }
 
 # הגדרת Listener
@@ -106,5 +121,11 @@ resource "aws_lb_listener" "my_listener" {
 
   default_action {
     type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "200"
+      content      = "OK"
+    }
   }
 }
