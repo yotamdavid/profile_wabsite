@@ -9,7 +9,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_internet_gateway" "my_internet_gateway" {}
 
 # קישור ה-Internet Gateway ל-VPC
-resource "aws_vpc_attachment" "my_vpc_attachment" {
+resource "aws_internet_gateway_attachment" "my_vpc_attachment" {
   vpc_id             = aws_vpc.my_vpc.id
   internet_gateway_id = aws_internet_gateway.my_internet_gateway.id
 }
@@ -55,12 +55,12 @@ resource "aws_route_table" "my_route_table" {
 }
 
 # הגדרת SubnetRouteTableAssociation
-resource "aws_subnet_route_table_association" "subnet_a_association" {
+resource "aws_route_table_association" "subnet_a_association" {
   subnet_id      = aws_subnet.subnet_a.id
   route_table_id = aws_route_table.my_route_table.id
 }
 
-resource "aws_subnet_route_table_association" "subnet_b_association" {
+resource "aws_route_table_association" "subnet_b_association" {
   subnet_id      = aws_subnet.subnet_b.id
   route_table_id = aws_route_table.my_route_table.id
 }
@@ -117,7 +117,7 @@ resource "aws_lb_listener" "my_listener" {
   protocol          = "HTTP"
 
   default_action {
-    type = "fixed-response"
+    type             = "fixed-response"
 
     fixed_response {
       content_type = "text/plain"
