@@ -75,9 +75,8 @@ resource "aws_lb_listener" "my_listener" {
     type = "fixed-response"
 
     fixed_response {
+      status_code = "200"
       content_type = "text/plain"
-      status_code  = "200"
-      content      = "OK"
     }
   }
 }
