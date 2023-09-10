@@ -1,21 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "3.0.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.region
-}
-
-variable "region" {
-  type = string
-  default = "us-east-1"
-}
-
 resource "aws_vpc" "my_vpc" {
   cidr_block          = "10.0.0.0/16"
   enable_dns_support  = true
@@ -81,5 +63,25 @@ resource "aws_lb" "my_load_balancer" {
 
   tags = {
     Name = "MyLoadBalancer"
+  }
+  
+  enable_deletion_protection = false
+  enable_http2               = true
+  idle_timeout               = 60
+}
+
+resource "aws_lb_listener" "my_listener" {
+  load_balancer_arn = aws_lb.my_load_balancer.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "200"
+      content      = "OK"
+    }
   }
 }
