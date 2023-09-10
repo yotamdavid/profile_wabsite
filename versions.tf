@@ -1,4 +1,8 @@
-provider "aws" {
-  version = "~> 3.0" # הגרסה המתאימה
-  region = "us-east-1"  # הערך הרירת מחדל
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "3.0.0"
+    }
+  }
 }
