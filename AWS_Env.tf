@@ -1,16 +1,25 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "3.0.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.region
+}
+
+variable "region" {
+  type = string
+  default = "us-east-1"
+}
+
 resource "aws_vpc" "my_vpc" {
   cidr_block          = "10.0.0.0/16"
   enable_dns_support  = true
   enable_dns_hostnames = true
-}
-
-resource "aws_route_table" "my_route_table" {
-  vpc_id = aws_vpc.my_vpc.id
-}
-
-resource "aws_main_route_table_association" "subnet_a_association" {
-  route_table_id = aws_route_table.my_route_table.id
-  vpc_id         = aws_vpc.my_vpc.id
 }
 
 resource "aws_subnet" "subnet_a" {
