@@ -1,13 +1,11 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
+      source = "hashicorp/aws"
       version = "3.0.0"
     }
   }
-  required_version = ">= 1.0, < 2.0"  # הגרסה המתאימה ל-Terraform 1.x
 }
-
 # הגדרת VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block          = "10.0.0.0/16"
