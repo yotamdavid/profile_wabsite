@@ -65,14 +65,15 @@ resource "aws_route_table" "my_route_table" {
 }
 
 # הגדרת SubnetRouteTableAssociation
-resource "aws_main_route_table_association" "subnet_a_association" {
-  vpc_id      = aws_vpc.my_vpc.id
+resource "aws_route_table_association" "subnet_a_association" {
+  subnet_id      = aws_subnet.subnet_a.id
+  route_table_id = aws_route_table.my_route_table.id
 }
 
-resource "aws_main_route_table_association" "subnet_b_association" {
-  vpc_id      = aws_vpc.my_vpc.id
+resource "aws_route_table_association" "subnet_b_association" {
+  subnet_id      = aws_subnet.subnet_b.id
+  route_table_id = aws_route_table.my_route_table.id
 }
-
 
 # הגדרת EC2 Instances
 resource "aws_instance" "ec2_instance_a" {
