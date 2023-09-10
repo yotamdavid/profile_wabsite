@@ -69,6 +69,11 @@ resource "aws_main_route_table_association" "subnet_a_association" {
   vpc_id      = aws_vpc.my_vpc.id
 }
 
+resource "aws_main_route_table_association" "subnet_b_association" {
+  vpc_id      = aws_vpc.my_vpc.id
+}
+
+
 # הגדרת EC2 Instances
 resource "aws_instance" "ec2_instance_a" {
   ami           = "ami-0fdcbfc2802f642d3"  # Amazon Linux 2 AMI ID (us-east-1)
