@@ -67,14 +67,12 @@ resource "aws_route_table_association" "subnet_b_association" {
 
 # הגדרת EC2 Instances
 resource "aws_instance" "ec2_instance_a" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet_a.id
   security_groups = [aws_security_group.my_security_group.id]
 }
 
 resource "aws_instance" "ec2_instance_b" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet_b.id
   security_groups = [aws_security_group.my_security_group.id]
