@@ -59,11 +59,6 @@ resource "aws_main_route_table_association" "subnet_a_association" {
   vpc_id      = aws_vpc.my_vpc.id
 }
 
-resource "aws_subnet_route_table_association" "subnet_b_association" {
-  subnet_id      = aws_subnet.subnet_b.id
-  route_table_id = aws_route_table.my_route_table.id
-}
-
 # הגדרת EC2 Instances
 resource "aws_instance" "ec2_instance_a" {
   ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
@@ -116,7 +111,7 @@ resource "aws_lb_listener" "my_listener" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "fixed-response"
+    type = "fixed-response"
 
     fixed_response {
       content_type = "text/plain"
