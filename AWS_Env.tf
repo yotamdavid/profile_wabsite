@@ -1,17 +1,22 @@
+# הגדרת VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block          = "10.0.0.0/16"
   enable_dns_support  = true
   enable_dns_hostnames = true
 }
 
-resource "aws_subnet" "subnet_a" {
-  vpc_id           = aws_vpc.my_vpc.id
-  cidr_block       = "10.0.0.0/24"
-  availability_zone = "us-east-1a"  # שנה את האזור כרצונך
+# הגדרת Internet Gateway
+resource "aws_internet_gateway" "my_internet_gateway" {}
+
+# קישור ה-Internet Gateway ל-VPC
+resource "aws_internet_gateway_attachment" "my_vpc_attachment" {
+  vpc_id             = aws_vpc.my_vpc.id
+  internet_gateway_id = aws_internet_gateway.my_internet_gateway.id
 }
 
+# הגדרת Security Group
 resource "aws_security_group" "my_security_group" {
-  name = "MySecurityGroup"
+  name = "SecurityGroupForMyApplication"
   vpc_id = aws_vpc.my_vpc.id
 
   # Inbound rules
@@ -31,6 +36,36 @@ resource "aws_security_group" "my_security_group" {
   }
 }
 
+# הגדרת Subnets
+resource "aws_subnet" "subnet_a" {
+  vpc_id           = aws_vpc.my_vpc.id
+  cidr_block       = "10.0.0.0/24"
+  availability_zone = "us-east-1a"  # שנה את האזור כרצונך
+}
+
+resource "aws_subnet" "subnet_b" {
+  vpc_id           = aws_vpc.my_vpc.id
+  cidr_block       = "10.0.1.0/24"
+  availability_zone = "us-east-1b"  # שנה את האזור כרצונך
+}
+
+# הגדרת Route Table
+resource "aws_route_table" "my_route_table" {
+  vpc_id = aws_vpc.my_vpc.id
+}
+
+# הגדרת SubnetRouteTableAssociation
+resource "aws_route_table_association" "subnet_a_association" {
+  subnet_id      = aws_subnet.subnet_a.id
+  route_table_id = aws_route_table.my_route_table.id
+}
+
+resource "aws_route_table_association" "subnet_b_association" {
+  subnet_id      = aws_subnet.subnet_b.id
+  route_table_id = aws_route_table.my_route_table.id
+}
+
+# הגדרת EC2 Instances
 resource "aws_instance" "ec2_instance_a" {
   ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
   instance_type = "t2.micro"
@@ -38,6 +73,14 @@ resource "aws_instance" "ec2_instance_a" {
   security_groups = [aws_security_group.my_security_group.id]
 }
 
+resource "aws_instance" "ec2_instance_b" {
+  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.subnet_b.id
+  security_groups = [aws_security_group.my_security_group.id]
+}
+
+# הגדרת Target Group
 resource "aws_lb_target_group" "my_target_group" {
   name     = "MyTargetGroup"
   port     = 5000
@@ -51,9 +94,10 @@ resource "aws_lb_target_group" "my_target_group" {
   }
 }
 
+# הגדרת Load Balancer
 resource "aws_lb" "my_load_balancer" {
   name               = "MyLoadBalancer"
-  subnets            = [aws_subnet.subnet_a.id]
+  subnets            = [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id]
   security_groups    = [aws_security_group.my_security_group.id]
   load_balancer_type = "application"
 
@@ -66,17 +110,18 @@ resource "aws_lb" "my_load_balancer" {
   }
 }
 
+# הגדרת Listener
 resource "aws_lb_listener" "my_listener" {
   load_balancer_arn = aws_lb.my_load_balancer.arn
   port              = 80
   protocol          = "HTTP"
 
   default_action {
-    type = "fixed-response"
+    type             = "fixed-response"
 
     fixed_response {
-      status_code = "200"
       content_type = "text/plain"
+      status_code  = "200"
     }
   }
 }
