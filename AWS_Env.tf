@@ -19,7 +19,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_internet_gateway" "my_internet_gateway" {}
 
 # קישור ה-Internet Gateway ל-VPC
-resource "aws_vpc_attachment" "my_vpc_attachment" {
+resource "aws_internet_gateway_attachment" "my_vpc_attachment" {
   vpc_id             = aws_vpc.my_vpc.id
   internet_gateway_id = aws_internet_gateway.my_internet_gateway.id
 }
