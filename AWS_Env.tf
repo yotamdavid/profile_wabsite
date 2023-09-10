@@ -5,7 +5,7 @@ terraform {
       version = "3.0.0"
     }
   }
-  required_version = ">= 1.0"
+  required_version = ">= 1.0, < 2.0"  # הגרסה המתאימה ל-Terraform 1.x
 }
 
 # הגדרת VPC
