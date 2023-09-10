@@ -117,8 +117,7 @@ resource "aws_lb_listener" "my_listener" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "fixed-response"
-
+    type = "fixed-response"
     fixed_response {
       content_type = "text/plain"
       status_code  = "200"
@@ -126,3 +125,4 @@ resource "aws_lb_listener" "my_listener" {
     }
   }
 }
+
