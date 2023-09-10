@@ -64,10 +64,6 @@ resource "aws_lb" "my_load_balancer" {
   tags = {
     Name = "MyLoadBalancer"
   }
-  
-  enable_deletion_protection = false
-  enable_http2               = true
-  idle_timeout               = 60
 }
 
 resource "aws_lb_listener" "my_listener" {
