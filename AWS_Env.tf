@@ -4,36 +4,47 @@ resource "aws_vpc" "my_vpc" {
   enable_dns_hostnames = true
 }
 
+resource "aws_route_table" "my_route_table" {
+  vpc_id = aws_vpc.my_vpc.id
+}
+
+resource "aws_main_route_table_association" "subnet_a_association" {
+  route_table_id = aws_route_table.my_route_table.id
+  vpc_id         = aws_vpc.my_vpc.id
+}
+
 resource "aws_subnet" "subnet_a" {
   vpc_id           = aws_vpc.my_vpc.id
   cidr_block       = "10.0.0.0/24"
   availability_zone = "us-east-1a"  # שנה את האזור כרצונך
 }
 
-resource "aws_subnet" "subnet_b" {
-  vpc_id           = aws_vpc.my_vpc.id
-  cidr_block       = "10.0.1.0/24"
-  availability_zone = "us-east-1b"  # שנה את האזור כרצונך
-}
-
-resource "aws_route_table" "my_route_table" {
+resource "aws_security_group" "my_security_group" {
+  name = "MySecurityGroup"
   vpc_id = aws_vpc.my_vpc.id
-}
 
-resource "aws_main_route_table_association" "subnet_a_association" {
-  subnet_id = aws_subnet.subnet_a.id
+  # Inbound rules
+  ingress {
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # כדאי להתאים את זה לצרכים שלך
+  }
+
+  # Outbound rules (allow all traffic)
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_instance" "ec2_instance_a" {
   ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet_a.id
-}
-
-resource "aws_instance" "ec2_instance_b" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI ID (us-east-1)
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.subnet_b.id
+  security_groups = [aws_security_group.my_security_group.id]
 }
 
 resource "aws_lb_target_group" "my_target_group" {
@@ -51,7 +62,7 @@ resource "aws_lb_target_group" "my_target_group" {
 
 resource "aws_lb" "my_load_balancer" {
   name               = "MyLoadBalancer"
-  subnets            = [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id]
+  subnets            = [aws_subnet.subnet_a.id]
   security_groups    = [aws_security_group.my_security_group.id]
   load_balancer_type = "application"
 
@@ -61,19 +72,5 @@ resource "aws_lb" "my_load_balancer" {
 
   tags = {
     Name = "MyLoadBalancer"
-  }
-}
-
-resource "aws_lb_listener" "my_listener" {
-  load_balancer_arn = aws_lb.my_load_balancer.arn
-  port              = 80
-  protocol          = "HTTP"
-
-  default_action {
-    type = "forward"
-
-    forward {
-      target_group_arn = aws_lb_target_group.my_target_group.arn
-    }
   }
 }
